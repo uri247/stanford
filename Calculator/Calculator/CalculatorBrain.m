@@ -50,6 +50,53 @@
 + (double)popOperandOffStack:(NSMutableArray*)stack
 {
     double result = 0;
+    id topOfStack = [stack lastObject];
+    if( topOfStack) {
+        [stack removeLastObject];
+    }
+    
+    if( [topOfStack isKindOfClass:[NSNumber class]] ) {
+        result = [topOfStack doubleValue];
+    }
+    else if( [topOfStack isKindOfClass:[NSString class]] )
+    {
+        NSString* operation = topOfStack;
+        
+        if( [operation isEqualToString:@"+"] ) {
+            result = [self popOperandOffStack:stack] + [self popOperandOffStack:stack];
+        }
+        else if( [operation isEqualToString:@"-"] ) {
+            result = [self popOperandOffStack:stack] - [self popOperandOffStack:stack];
+        }
+        else if( [operation isEqualToString:@"*"] ) {
+            result = [self popOperandOffStack:stack] * [self popOperandOffStack:stack];
+        }
+        else if( [operation isEqualToString:@"/"] ) {
+            result = [self popOperandOffStack:stack] / [self popOperandOffStack:stack];
+        }
+        else if( [operation isEqualToString:@"+/-"] ) {
+            result = - [self popOperandOffStack:stack];
+        }
+        else if( [operation isEqualToString:@"pi"] ) {
+            result = 3.14159265;
+        }
+        else if( [operation isEqualToString:@"e"] ) {
+            result = 2.718281828;
+        }
+        else if( [operation isEqualToString:@"sin"] ) {
+            result = sin( [self popOperandOffStack:stack] );
+        }
+        else if( [operation isEqualToString:@"cos"] ) {
+            result = cos( [self popOperandOffStack:stack] );
+        }
+        else if( [operation isEqualToString:@"sqrt"] ) {
+            result = sqrt( [self popOperandOffStack:stack] );
+        }
+        else if( [operation isEqualToString:@"log"] ) {
+            result = log( [self popOperandOffStack:stack] );
+        }
+    }
+        
     return result;
 }
 
@@ -61,47 +108,6 @@
     }
     return [self popOperandOffStack:stack];
 }
-    /*
-    double result = 0;
-    
-    if( [operation isEqualToString:@"+"] ) {
-        result = [self popOperand] + [self popOperand];
-    }
-    else if( [operation isEqualToString:@"-"] ) {
-        result = [self popOperand] - [self popOperand];
-    }
-    else if( [operation isEqualToString:@"*"] ) {
-        result = [self popOperand] * [self popOperand];
-    }
-    else if( [operation isEqualToString:@"/"] ) {
-        result = [self popOperand] / [self popOperand];
-    }
-    else if( [operation isEqualToString:@"+/-"] ) {
-        result = - [self popOperand];
-    }
-    else if( [operation isEqualToString:@"pi"] ) {
-        result = 3.14159265;
-    }
-    else if( [operation isEqualToString:@"e"] ) {
-        result = 2.718281828;
-    }
-    else if( [operation isEqualToString:@"sin"] ) {
-        result = sin( [self popOperand] );
-    }
-    else if( [operation isEqualToString:@"cos"] ) {
-        result = cos( [self popOperand] );
-    }
-    else if( [operation isEqualToString:@"sqrt"] ) {
-        result = sqrt( [self popOperand] );
-    }
-    else if( [operation isEqualToString:@"log"] ) {
-        result = log( [self popOperand] );
-    }
-    
-    [self pushOperand:result];
-    
-    return result;
-     */
 
 - (void)clear
 {
