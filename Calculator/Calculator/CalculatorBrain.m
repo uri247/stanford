@@ -101,6 +101,6 @@
 
 - (void)clear
 {
-    [self.operandStack removeAllObjects];
+    [self.programStack removeAllObjects];
 }
 @end
