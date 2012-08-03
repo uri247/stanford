@@ -16,12 +16,17 @@
 
 @synthesize programStack = _programStack;
 
-- (NSMutableArray*)operandStack
+- (NSMutableArray*)programStack
 {
     if (_programStack == nil) {
         _programStack = [[NSMutableArray alloc] init];
     }
     return _programStack;
+}
+
+- (id)program
+{
+    return [self.programStack copy];
 }
 
 
@@ -35,7 +40,23 @@
 {
     [self.programStack addObject:operation];
     return [CalculatorBrain runProgram:self.program];
-    
+}
+
++ (NSString*)descriptionOfProgram:(id)program
+{
+    return @"implement this later";
+}
+
++ (double)popOperandOffStack:(NSMutableArray*)stack
+{
+    double result = 0;
+    return result;
+}
+
++ (double)runProgram:(id)program
+{
+    return [self popOperandOffStack:[program mutableCopy]];
+}
     /*
     double result = 0;
     
@@ -77,7 +98,6 @@
     
     return result;
      */
-}
 
 - (void)clear
 {
