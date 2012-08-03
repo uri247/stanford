@@ -26,6 +26,7 @@
 
 - (id)program
 {
+    // returns a copy of the program stack
     return [self.programStack copy];
 }
 
