@@ -22,6 +22,6 @@
 +(double)runProgram:(id)Program
 	usingVariableValues:(NSDictionary*)variableValues;
 +(NSString*)descriptionOfProgram:(id)program;
-+(BOOL)isOperation:(NSString*)opname;
+
 
 @end
