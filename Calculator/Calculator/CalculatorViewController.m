@@ -14,6 +14,7 @@
 @property (nonatomic) BOOL userInTheMiddleOfANumber;
 @property (nonatomic) BOOL userPressedDot;
 @property (nonatomic, strong) CalculatorBrain* brain;
+@property (nonatomic, strong) NSDictionary* variableValues;
 @end
 
 
@@ -23,6 +24,7 @@
 @synthesize progDesc = _progDesc;
 @synthesize userInTheMiddleOfANumber = _userInTheMiddleOfANumber;
 @synthesize brain = _brain;
+@synthesize variableValues = _variableValues;
 
 
 - (CalculatorBrain*)brain
@@ -31,6 +33,14 @@
         _brain = [[CalculatorBrain alloc] init];
     }
     return _brain;
+}
+
+- (NSDictionary*)variableValues
+{
+    if( !_variableValues ) {
+        _variableValues = [[NSDictionary alloc] init];
+    }
+    return _variableValues;
 }
 
 - (IBAction)digitPressed:(UIButton*)sender {
