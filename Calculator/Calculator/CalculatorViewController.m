@@ -22,9 +22,12 @@
 
 @synthesize display = _display;
 @synthesize progDesc = _progDesc;
+@synthesize variableDesc = _variableDesc;
 @synthesize userInTheMiddleOfANumber = _userInTheMiddleOfANumber;
 @synthesize brain = _brain;
 @synthesize variableValues = _variableValues;
+
+
 
 
 - (CalculatorBrain*)brain
@@ -73,6 +76,14 @@
     }
 }
 
+- (void)refreshVariableDesc {
+    NSMutableString* variableDesc = [NSMutableString stringWithString:@""];
+    for (NSString* vname in self.variableValues) {
+        [variableDesc appendFormat:@" %@=%@", vname, [self.variableValues objectForKey:vname]];
+    }
+    self.variableDesc.text = variableDesc;
+}
+
 - (IBAction)enterPressed {
     [self.brain pushOperand:self.display.text.doubleValue];
     [self refreshResult:false];
@@ -105,17 +116,18 @@
                                [NSNumber numberWithDouble:15], @"x",
                                [NSNumber numberWithDouble:3], @"y",
                                [NSNumber numberWithDouble:4], @"z",
-                               [NSNumber numberWithDouble:12], @"12",
+                               [NSNumber numberWithDouble:12], @"w",
                                nil
                                ];
     }
     else if( [sender.currentTitle isEqualToString:@"Test 3"] ) {
         self.variableValues = [NSDictionary dictionaryWithObjectsAndKeys:
                                [NSNumber numberWithDouble:42], @"answer",
-                               [NSNumber numberWithDouble:8], @"X",
+                               [NSNumber numberWithDouble:8], @"x",
                                nil
                                ];
     }
+    [self refreshVariableDesc];
 }
 
 
@@ -127,4 +139,5 @@
     [super viewDidUnload];
 }
 @end
+
 	

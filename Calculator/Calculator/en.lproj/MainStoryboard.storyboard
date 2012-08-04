@@ -497,6 +497,7 @@
                     <connections>
                         <outlet property="display" destination="Gj0-Lo-klk" id="JRE-i8-Nej"/>
                         <outlet property="progDesc" destination="IkK-wb-vYq" id="PNG-NY-W66"/>
+                        <outlet property="variableDesc" destination="Bas-I6-CPM" id="UXA-2L-CLL"/>
                     </connections>
                 </viewController>
             </objects>
@@ -513,6 +514,7 @@
                 <relationship kind="action" name="variablePressed:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="display" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="progDesc" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="variableDesc" candidateClass="UILabel"/>
             </relationships>
         </class>
     </classes>
