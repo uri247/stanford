@@ -104,6 +104,12 @@
     [self refreshResult:(true)];
 }
 
+- (IBAction)testPressed:(UIButton *)sender {
+    
+}
+
+- (IBAction)variablePressed:(UIButton *)sender {
+}
 
 - (void)viewDidUnload {
     [self setProgDesc:nil];
