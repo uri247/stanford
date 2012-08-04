@@ -16,9 +16,11 @@
 @property (nonatomic, strong) CalculatorBrain* brain;
 @end
 
+
 @implementation CalculatorViewController
+
 @synthesize display = _display;
-@synthesize everything = _everything;
+@synthesize progDesc = _progDesc;
 @synthesize userInTheMiddleOfANumber = _userInTheMiddleOfANumber;
 @synthesize brain = _brain;
 
@@ -44,33 +46,41 @@
     else {
         self.display.text = digit;
         self.userInTheMiddleOfANumber = TRUE;
-        [self removeEqualFromEverything];
+        [self removeEqualFromProgDisc];
     }
 }
 
 - (void)addItemToEverything :(NSString*)item {
-    self.everything.text = [self.everything.text stringByAppendingFormat:@" %@", item];
+    self.progDesc.text = [self.progDesc.text stringByAppendingFormat:@" %@", item];
 }
 
-- (void)removeEqualFromEverything {
-    NSString* ev = self.everything.text;
+- (void)removeEqualFromProgDisc {
+    NSString* ev = self.progDesc.text;
     NSRange range = [ev rangeOfString:@" ="];
     if( range.location != NSNotFound ) {
         NSString* newev = [ev substringToIndex:range.location];
-        self.everything.text = newev;
+        self.progDesc.text = newev;
+    }
+}
+
+- (void)refreshResult :(BOOL)recalc {
+    self.progDesc.text = [CalculatorBrain descriptionOfProgram:[self.brain program]];
+    if( recalc ) {
+        double result = [CalculatorBrain runProgram:[self.brain program]];
+        self.display.text = [NSString stringWithFormat:@"%g", result];
     }
 }
 
 - (IBAction)enterPressed {
     [self.brain pushOperand:self.display.text.doubleValue];
-    [self addItemToEverything:self.display.text];
+    [self refreshResult:false];
     self.userInTheMiddleOfANumber = FALSE;
     self.userPressedDot = FALSE;
 }
 
 - (IBAction)clearPressed {
     self.display.text = @"";
-    self.everything.text = @"";
+    self.progDesc.text = @"";
     self.userInTheMiddleOfANumber = FALSE;
     self.userPressedDot = FALSE;
     [self.brain clear];
@@ -80,19 +90,13 @@
     if( self.userInTheMiddleOfANumber) {
         [self enterPressed];
     }
-    else {
-        [self removeEqualFromEverything];
-    }
-    [self addItemToEverything:sender.currentTitle];
-    [self addItemToEverything:@" ="];
-    double result = [self.brain performOperation:sender.currentTitle];
-    NSString* resultString = [NSString stringWithFormat:@"%g", result];
-    self.display.text = resultString;
+    [self.brain pushOperator:sender.currentTitle];
+    [self refreshResult:(true)];
 }
 
 
 - (void)viewDidUnload {
-    [self setEverything:nil];
+    [self setProgDesc:nil];
     [super viewDidUnload];
 }
 @end

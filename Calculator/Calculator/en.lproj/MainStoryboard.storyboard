@@ -393,7 +393,7 @@
                     </view>
                     <connections>
                         <outlet property="display" destination="Gj0-Lo-klk" id="JRE-i8-Nej"/>
-                        <outlet property="everything" destination="IkK-wb-vYq" id="zdP-Px-rSs"/>
+                        <outlet property="progDesc" destination="IkK-wb-vYq" id="PNG-NY-W66"/>
                     </connections>
                 </viewController>
             </objects>
