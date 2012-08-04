@@ -35,14 +35,6 @@
     return _brain;
 }
 
-- (NSDictionary*)variableValues
-{
-    if( !_variableValues ) {
-        _variableValues = [[NSDictionary alloc] init];
-    }
-    return _variableValues;
-}
-
 - (IBAction)digitPressed:(UIButton*)sender {
     NSString* digit = sender.currentTitle;
     if( [digit isEqualToString:@"."] ) {
@@ -105,8 +97,27 @@
 }
 
 - (IBAction)testPressed:(UIButton *)sender {
-    
+    if( [sender.currentTitle isEqualToString:@"Test 1"] ) {
+        self.variableValues = nil;
+    }
+    else if( [sender.currentTitle isEqualToString:@"Test 2"] ) {
+        self.variableValues = [NSDictionary dictionaryWithObjectsAndKeys:
+                               [NSNumber numberWithDouble:15], @"x",
+                               [NSNumber numberWithDouble:3], @"y",
+                               [NSNumber numberWithDouble:4], @"z",
+                               [NSNumber numberWithDouble:12], @"12",
+                               nil
+                               ];
+    }
+    else if( [sender.currentTitle isEqualToString:@"Test 3"] ) {
+        self.variableValues = [NSDictionary dictionaryWithObjectsAndKeys:
+                               [NSNumber numberWithDouble:42], @"answer",
+                               [NSNumber numberWithDouble:8], @"X",
+                               nil
+                               ];
+    }
 }
+
 
 - (IBAction)variablePressed:(UIButton *)sender {
 }
