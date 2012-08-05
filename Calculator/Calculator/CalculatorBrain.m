@@ -112,10 +112,13 @@
             prec = op->_prec;
         }
     }
+    else if( [self isVariable:topOfStack] ) {
+        result = topOfStack;
+        prec = PrecAtomic;
+    }
 
     if( pprec ) *pprec = prec;
     return result;
-     
 }
 
 
@@ -206,20 +209,24 @@
     NSMutableArray* stack;
     int i;
     
-    if( [program isKindOfClass:[NSArray class]] ) {
+    if( [program isKindOfClass:[NSArray class]] )
         stack = [program mutableCopy];
-    
-        for( i=0; i<stack.count; ++i )
-        {
-            id o = [stack objectAtIndex:i];
-            if( [o isKindOfClass:[NSString class]] ) {
-                if( ![self isOperation:o] ) {
-                    [stack replaceObjectAtIndex:i withObject:[variableValues objectForKey:o]];
-                }
+        
+
+    for( i=0; i<stack.count; ++i )
+    {
+        id obj = [stack objectAtIndex:i];
+        if( [self isVariable:obj] ) {
+            id val = [variableValues objectForKey:obj];
+            if( !val ) {
+                val = [NSNumber numberWithDouble:0];
             }
-        }    
+            [stack replaceObjectAtIndex:i withObject:val];
+        }
     }
-    return 0;
+    
+    return [self runProgram:stack];
+
 }
 
 

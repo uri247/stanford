@@ -68,12 +68,10 @@
     }
 }
 
-- (void)refreshResult :(BOOL)recalc {
+- (void)refreshResult {
     self.progDesc.text = [CalculatorBrain descriptionOfProgram:[self.brain program]];
-    if( recalc ) {
-        double result = [CalculatorBrain runProgram:[self.brain program]];
-        self.display.text = [NSString stringWithFormat:@"%g", result];
-    }
+    double result = [CalculatorBrain runProgram:[self.brain program] usingVariableValues:self.variableValues];
+    self.display.text = [NSString stringWithFormat:@"%g", result];
 }
 
 - (void)refreshVariableDesc {
@@ -86,7 +84,7 @@
 
 - (IBAction)enterPressed {
     [self.brain pushOperand:self.display.text.doubleValue];
-    [self refreshResult:false];
+    [self refreshResult];
     self.userInTheMiddleOfANumber = FALSE;
     self.userPressedDot = FALSE;
 }
@@ -104,7 +102,7 @@
         [self enterPressed];
     }
     [self.brain pushOperator:sender.currentTitle];
-    [self refreshResult:(true)];
+    [self refreshResult];
 }
 
 - (IBAction)testPressed:(UIButton *)sender {
@@ -128,10 +126,14 @@
                                ];
     }
     [self refreshVariableDesc];
+    [self refreshResult];
 }
 
 
 - (IBAction)variablePressed:(UIButton *)sender {
+    NSString* v = sender.currentTitle;
+    [self.brain pushVariable:v];
+    [self refreshResult];
 }
 
 - (void)viewDidUnload {
