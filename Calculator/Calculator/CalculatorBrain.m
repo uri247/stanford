@@ -58,9 +58,54 @@
     return [CalculatorBrain runProgram:self.program];
 }
 
++ (id)popFromStack:(NSMutableArray*)stack
+{
+    id topOfStack = [stack lastObject];
+    if( topOfStack) {
+        [stack removeLastObject];
+    }
+    return topOfStack;
+}
+
++ (NSString*)popDescriptionOffStack:(NSMutableArray*)stack
+{
+    NSString* result;
+    id topOfStack = [self popFromStack:stack];
+    
+    if( [self isNumber:topOfStack] ) {
+        NSNumber* num = topOfStack;
+        result = [num stringValue];
+    }
+    else if( [self isOperation:topOfStack] ) {
+        struct Operation* op = [self getOp:topOfStack];
+        NSString *arg1, *arg2;
+        if( op->_numOperands >= 2 )
+            arg2 = [self popDescriptionOffStack:stack];
+        if( op->_numOperands >= 1 )
+            arg1 = [self popDescriptionOffStack:stack];
+        
+        if( op->_numOperands == 0 ) {
+            result = [NSString stringWithCString:op->_name encoding:NSUTF8StringEncoding];
+        }
+        else if( op->_numOperands == 1 ) {
+            result = [NSString stringWithFormat:@"%s(%@)", op->_name, arg1];
+        }
+        else if( op->_numOperands == 2 ) {
+            result = [NSString stringWithFormat:@"(%@ %s %@)", arg1, op->_name, arg2];
+        }
+    }
+
+    return result;
+}
+
+
 + (NSString*)descriptionOfProgram:(id)program
 {
-    return @"implement this later";
+    NSMutableArray* stack;
+    if( [program isKindOfClass:[NSArray class]] ) {
+        stack = [program mutableCopy];
+    }
+    return [self popDescriptionOffStack:stack];
 }
 
 + (double)popOperandOffStack:(NSMutableArray*)stack
@@ -127,6 +172,10 @@
         return false;
 }
 
++ (BOOL)isNumber:(id)obj
+{
+    return [obj isKindOfClass:[NSNumber class]];
+}
 
 + (double)runProgram:(id)program usingVariableValues:(NSDictionary *)variableValues
 {
