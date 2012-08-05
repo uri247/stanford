@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16454D1215CE46E5002A644B /* Operation.m in Sources */ = {isa = PBXBuildFile; fileRef = 16454D1115CE46E5002A644B /* Operation.m */; };
 		16BDB45F15BD916D002121F6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16BDB45E15BD916D002121F6 /* UIKit.framework */; };
 		16BDB46115BD916D002121F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16BDB46015BD916D002121F6 /* Foundation.framework */; };
 		16BDB46315BD916D002121F6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16BDB46215BD916D002121F6 /* CoreGraphics.framework */; };
@@ -19,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16454D1015CE46E5002A644B /* Operation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Operation.h; sourceTree = "<group>"; };
+		16454D1115CE46E5002A644B /* Operation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Operation.m; sourceTree = "<group>"; };
 		16BDB45A15BD916D002121F6 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16BDB45E15BD916D002121F6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		16BDB46015BD916D002121F6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -88,6 +91,8 @@
 				16BDB47315BD916D002121F6 /* CalculatorViewController.h */,
 				16BDB47415BD916D002121F6 /* CalculatorViewController.m */,
 				16BDB46515BD916D002121F6 /* Supporting Files */,
+				16454D1015CE46E5002A644B /* Operation.h */,
+				16454D1115CE46E5002A644B /* Operation.m */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -170,6 +175,7 @@
 				16BDB46F15BD916D002121F6 /* CalculatorAppDelegate.m in Sources */,
 				16BDB47515BD916D002121F6 /* CalculatorViewController.m in Sources */,
 				16BDB47D15BDA322002121F6 /* CalculatorBrain.m in Sources */,
+				16454D1215CE46E5002A644B /* Operation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +287,7 @@
 				16BDB47A15BD916D002121F6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

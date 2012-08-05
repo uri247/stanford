@@ -46,12 +46,14 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Calculator/CalculatorBrain.m"
-         timestampString = "365806691.98018"
+         filePath = "Calculator/Operation.m"
+         timestampString = "365841369.882232"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "56"
-         endingLineNumber = "56">
+         startingLineNumber = "12"
+         endingLineNumber = "12"
+         landmarkName = "@implementation OperationTraits"
+         landmarkType = "3">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

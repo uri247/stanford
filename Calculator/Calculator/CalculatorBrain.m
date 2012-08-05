@@ -7,51 +7,7 @@
 //
 
 #import "CalculatorBrain.h"
-
-@interface OperationTraits :NSObject
-{
-    NSString* _name;
-    int _numOperands;
-}
-+ (OperationTraits*)initWithName:(NSString*)name andNum:(int)num;
-+ (NSArray*)all;
-+ (OperationTraits*)find:(NSString*)name;
-@end
-
-@implementation OperationTraits
-
-+ (OperationTraits*)initWithName:(NSString*)name andNum:(int)num {
-    OperationTraits* optr = [[OperationTraits alloc] init];
-    optr->_name = name;
-    optr->_numOperands = num;
-    return optr;
-}
-
-+ (NSArray*)all
-{
-    return [NSArray arrayWithObjects:
-            [OperationTraits initWithName:@"pi" andNum:0],
-            [OperationTraits initWithName:@"e" andNum:0],
-            [OperationTraits initWithName:@"+/-" andNum:1],
-            [OperationTraits initWithName:@"sqrt" andNum:1],
-            [OperationTraits initWithName:@"sin" andNum:1],
-            [OperationTraits initWithName:@"cos" andNum:1],
-            [OperationTraits initWithName:@"+" andNum:2],
-            [OperationTraits initWithName:@"-" andNum:2],
-            [OperationTraits initWithName:@"*" andNum:2],
-            [OperationTraits initWithName:@"/" andNum:2],
-            nil
-            ];
-}
-
-+ (OperationTraits*)find:(NSString*)name {
-    for (OperationTraits* const optr in [self all]) {
-        if( [optr->_name isEqualToString:name] )
-            return optr;
-    }
-    return nil;
-}
-@end
+#import "Operation.h"
 
 
 @interface CalculatorBrain()
