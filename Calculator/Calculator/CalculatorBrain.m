@@ -67,35 +67,55 @@
     return topOfStack;
 }
 
-+ (NSString*)popDescriptionOffStack:(NSMutableArray*)stack
++ (NSString*)popDescriptionOffStack:(NSMutableArray*)stack :(enum Precedence*)pprec
 {
     NSString* result;
     id topOfStack = [self popFromStack:stack];
+    enum Precedence prec;
     
     if( [self isNumber:topOfStack] ) {
         NSNumber* num = topOfStack;
         result = [num stringValue];
+        prec = PrecAtomic;
     }
     else if( [self isOperation:topOfStack] ) {
         struct Operation* op = [self getOp:topOfStack];
         NSString *arg1, *arg2;
+        enum Precedence prec1, prec2;
+        
         if( op->_numOperands >= 2 )
-            arg2 = [self popDescriptionOffStack:stack];
+            arg2 = [self popDescriptionOffStack:stack :&prec2];
         if( op->_numOperands >= 1 )
-            arg1 = [self popDescriptionOffStack:stack];
+            arg1 = [self popDescriptionOffStack:stack :&prec1];
         
         if( op->_numOperands == 0 ) {
             result = [NSString stringWithCString:op->_name encoding:NSUTF8StringEncoding];
+            prec = PrecAtomic;
         }
         else if( op->_numOperands == 1 ) {
             result = [NSString stringWithFormat:@"%s(%@)", op->_name, arg1];
+            prec = PrecAtomic;
         }
         else if( op->_numOperands == 2 ) {
-            result = [NSString stringWithFormat:@"(%@ %s %@)", arg1, op->_name, arg2];
+            // Prepare the format string, and put parenthesis according to precedence calculation
+            NSString* fmt;
+            if( prec1 <= op->_prec && prec2 <= op->_prec )
+                fmt = @"%@ %s %@";
+            else if( prec1 < op->_prec && prec2 > op->_prec )
+                fmt = @"%@ %s (%@)";
+            else if( prec1 > op->_prec && prec2 <= op->_prec )
+                fmt = @"(%@) %s %@";
+            else
+                fmt = @"(%@) %s (%@)";
+            
+            result = [NSString stringWithFormat:fmt, arg1, op->_name, arg2];
+            prec = op->_prec;
         }
     }
 
+    if( pprec ) *pprec = prec;
     return result;
+     
 }
 
 
@@ -105,7 +125,7 @@
     if( [program isKindOfClass:[NSArray class]] ) {
         stack = [program mutableCopy];
     }
-    return [self popDescriptionOffStack:stack];
+    return [self popDescriptionOffStack:stack :nil];
 }
 
 + (double)popOperandOffStack:(NSMutableArray*)stack
