@@ -125,7 +125,11 @@
     if( [program isKindOfClass:[NSArray class]] ) {
         stack = [program mutableCopy];
     }
-    return [self popDescriptionOffStack:stack :nil];
+    NSString* result = [self popDescriptionOffStack:stack :nil];
+    while( stack.count > 0 ) {
+        result = [[self popDescriptionOffStack:stack :nil] stringByAppendingFormat:@", %@", result];
+    }
+    return result;
 }
 
 + (double)popOperandOffStack:(NSMutableArray*)stack
