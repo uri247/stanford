@@ -8,8 +8,8 @@
 
 #import "Operation.h"
 
-double pi() { return 3.1415926; }
-double e() { return 2.718281828; }
+double pi() { return acos(-1); }
+double e() { return exp(1); }
 double neg(double x) { return -x; }
 double add(double x, double y) { return x+y; }
 double sub(double x, double y) { return x-y; }
@@ -21,6 +21,7 @@ static struct Operation _AllOperations[] = {
     { "e", 0, e, PrecAtomic },
     { "+/-", 1, neg, PrecAtomic },
     { "sqrt", 1, sqrt, PrecAtomic },
+    { "log", 1, log, PrecAtomic },
     { "sin", 1, sin, PrecAtomic },
     { "cos", 1, cos, PrecAtomic },
     { "+", 2, add, PrecAdd },
