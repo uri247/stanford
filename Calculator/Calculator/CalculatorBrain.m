@@ -74,45 +74,26 @@
     if( [topOfStack isKindOfClass:[NSNumber class]] ) {
         result = [topOfStack doubleValue];
     }
-    else if( [topOfStack isKindOfClass:[NSString class]] )
+    else if( [self isOperation:topOfStack] )
     {
-        NSString* operation = topOfStack;
+        struct Operation* op = [self getOp:topOfStack];
         
-        if( [operation isEqualToString:@"+"] ) {
-            result = [self popOperandOffStack:stack] + [self popOperandOffStack:stack];
-        }
-        else if( [operation isEqualToString:@"-"] ) {
-            result = [self popOperandOffStack:stack] - [self popOperandOffStack:stack];
-        }
-        else if( [operation isEqualToString:@"*"] ) {
-            result = [self popOperandOffStack:stack] * [self popOperandOffStack:stack];
-        }
-        else if( [operation isEqualToString:@"/"] ) {
-            result = [self popOperandOffStack:stack] / [self popOperandOffStack:stack];
-        }
-        else if( [operation isEqualToString:@"+/-"] ) {
-            result = - [self popOperandOffStack:stack];
-        }
-        else if( [operation isEqualToString:@"pi"] ) {
-            result = 3.14159265;
-        }
-        else if( [operation isEqualToString:@"e"] ) {
-            result = 2.718281828;
-        }
-        else if( [operation isEqualToString:@"sin"] ) {
-            result = sin( [self popOperandOffStack:stack] );
-        }
-        else if( [operation isEqualToString:@"cos"] ) {
-            result = cos( [self popOperandOffStack:stack] );
-        }
-        else if( [operation isEqualToString:@"sqrt"] ) {
-            result = sqrt( [self popOperandOffStack:stack] );
-        }
-        else if( [operation isEqualToString:@"log"] ) {
-            result = log( [self popOperandOffStack:stack] );
-        }
+        // collect appropriate number of arguments recursively
+        double arg1, arg2;
+        if( op->_numOperands >= 2 )
+            arg2 = [self popOperandOffStack:stack];
+        if( op->_numOperands >= 1 )
+            arg1 = [self popOperandOffStack:stack];
+        
+        // call
+        if( op->_numOperands == 0 )
+            result = (*op->_fn)( );
+        else if( op->_numOperands == 1 )
+            result = (*op->_fn)( arg1 );
+        else if( op->_numOperands == 2 )
+            result = (*op->_fn)( arg1, arg2 );
     }
-        
+    
     return result;
 }
 
@@ -125,10 +106,22 @@
     return [self popOperandOffStack:stack];
 }
 
+
++ (struct Operation*)getOp:(id)opname
+{
+    return [Operations find:opname];
+}
+
 + (BOOL)isOperation:(id)opname
 {
-    if ( [opname isKindOfClass:[NSString class]] ) {
-        return ([OperationTraits find:opname]) ? true: false;
+    return [Operations find:opname] ? true : false;
+}
+
++ (BOOL)isVariable:(id)obj
+{
+    // A variable is a string which is not an operation
+    if ( [obj isKindOfClass:[NSString class]] ) {
+        return ![self isOperation:obj];
     }
     else
         return false;

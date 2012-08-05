@@ -9,53 +9,44 @@
 #import "Operation.h"
 
 
-@implementation OperationTraits
+double pi() { return 3.1415926; }
+double e() { return 2.718281828; }
+double neg(double x) { return -x; }
+double add(double x, double y) { return x+y; }
+double sub(double x, double y) { return x-y; }
+double mul(double x, double y) { return x*y; }
+double divide(double x, double y) { return x/y; }
 
-+ (OperationTraits*)initWithName:(NSString*)name
-                             Num:(int)num
-                             Sel:(SEL)sel
+static struct Operation _AllOperations[] = {
+    { "pi", 0, pi },
+    { "e", 0, e },
+    { "+/-", 1, neg },
+    { "sqrt", 1, sqrt },
+    { "sin", 1, sin },
+    { "cos", 1, cos },
+    { "+", 2, add },
+    { "-", 2, sub },
+    { "*", 2, mul },
+    { "/", 2, divide },
+};
+static int _num_operations = sizeof(_AllOperations)/sizeof(struct Operation);
+
+
+@implementation Operations
+
+
++ (struct Operation*)find:(id)name
 {
-    OperationTraits* optr = [[OperationTraits alloc] init];
-    optr->_name = name;
-    optr->_numOperands = num;
-    optr->_sel = sel;
-    return optr;
-}
-
-+ (NSArray*)all
-{
-    return [NSArray arrayWithObjects:
-            [OperationTraits initWithName:@"pi" Num:0 Sel:@selector(pi)],
-            [OperationTraits initWithName:@"e" Num:0 Sel:@selector(e)],
-            [OperationTraits initWithName:@"+/-" Num:1 Sel:@selector(negative)],
-            [OperationTraits initWithName:@"sqrt" Num:1 Sel:@selector(sqrt)],
-            [OperationTraits initWithName:@"sin" Num:1 Sel:@selector(sin)],
-            [OperationTraits initWithName:@"cos" Num:1 Sel:@selector(cos)],
-            [OperationTraits initWithName:@"+" Num:2 Sel:@selector(add)],
-            [OperationTraits initWithName:@"-" Num:2 Sel:@selector(sub)],
-            [OperationTraits initWithName:@"*" Num:2 Sel:@selector(mul)],
-            [OperationTraits initWithName:@"/" Num:2 Sel:@selector(div)],
-            nil
-            ];
-}
-
-+ (OperationTraits*)find:(NSString*)name {
-    for (OperationTraits* const optr in [self all]) {
-        if( [optr->_name isEqualToString:name] )
-            return optr;
+    int i;
+    if( [name isKindOfClass:[NSString class]] ) {
+        for( i=0; i<_num_operations; ++i ) {
+            if( !strcmp( [name cString], _AllOperations[i]._name ) ) {
+                return _AllOperations + i;
+            }
+        }
     }
     return nil;
 }
 
-+ (double)pi { return 3.1415926; }
-+ (double)e { return 2.718281828; }
-+ (double)negative:(double)x { return -x; }
-+ (double)sqrt:(double)x { return sqrt(x); }
-+ (double)sin:(double)x { return sin(x); }
-+ (double)cos:(double)x { return cos(x); }
-+ (double)add:(double)x :(double)y { return x+y; }
-+ (double)mul:(double)x :(double)y { return x*y; }
-+ (double)sub:(double)x :(double)y { return x-y; }
-+ (double)div:(double)x :(double)y { return x/y; }
 
 @end
