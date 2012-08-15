@@ -15,6 +15,7 @@
 		167CC46015DBE4E300A4CD2F /* HappinessAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 167CC45F15DBE4E300A4CD2F /* HappinessAppDelegate.m */; };
 		167CC46315DBE4E300A4CD2F /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 167CC46115DBE4E300A4CD2F /* MainStoryboard.storyboard */; };
 		167CC46615DBE4E300A4CD2F /* HappinessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 167CC46515DBE4E300A4CD2F /* HappinessViewController.m */; };
+		167CC47015DBE5AD00A4CD2F /* FaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 167CC46F15DBE5AD00A4CD2F /* FaceView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,8 @@
 		167CC46215DBE4E300A4CD2F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		167CC46415DBE4E300A4CD2F /* HappinessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HappinessViewController.h; sourceTree = "<group>"; };
 		167CC46515DBE4E300A4CD2F /* HappinessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HappinessViewController.m; sourceTree = "<group>"; };
+		167CC46E15DBE5AD00A4CD2F /* FaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceView.h; sourceTree = "<group>"; };
+		167CC46F15DBE5AD00A4CD2F /* FaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +86,8 @@
 				167CC46415DBE4E300A4CD2F /* HappinessViewController.h */,
 				167CC46515DBE4E300A4CD2F /* HappinessViewController.m */,
 				167CC45615DBE4E300A4CD2F /* Supporting Files */,
+				167CC46E15DBE5AD00A4CD2F /* FaceView.h */,
+				167CC46F15DBE5AD00A4CD2F /* FaceView.m */,
 			);
 			path = Happiness;
 			sourceTree = "<group>";
@@ -165,6 +170,7 @@
 				167CC45C15DBE4E300A4CD2F /* main.m in Sources */,
 				167CC46015DBE4E300A4CD2F /* HappinessAppDelegate.m in Sources */,
 				167CC46615DBE4E300A4CD2F /* HappinessViewController.m in Sources */,
+				167CC47015DBE5AD00A4CD2F /* FaceView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
