@@ -85,9 +85,9 @@
 				167CC46115DBE4E300A4CD2F /* MainStoryboard.storyboard */,
 				167CC46415DBE4E300A4CD2F /* HappinessViewController.h */,
 				167CC46515DBE4E300A4CD2F /* HappinessViewController.m */,
-				167CC45615DBE4E300A4CD2F /* Supporting Files */,
 				167CC46E15DBE5AD00A4CD2F /* FaceView.h */,
 				167CC46F15DBE5AD00A4CD2F /* FaceView.m */,
+				167CC45615DBE4E300A4CD2F /* Supporting Files */,
 			);
 			path = Happiness;
 			sourceTree = "<group>";
