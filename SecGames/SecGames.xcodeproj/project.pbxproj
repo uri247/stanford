@@ -16,6 +16,9 @@
 		1604865C15D291E70048BF64 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1604865A15D291E70048BF64 /* MainStoryboard.storyboard */; };
 		1604865F15D291E70048BF64 /* SegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1604865E15D291E70048BF64 /* SegViewController.m */; };
 		1604866615D292650048BF64 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1604866515D292650048BF64 /* Security.framework */; };
+		16FD615615E21DAA00AB8619 /* CryptoData.c in Sources */ = {isa = PBXBuildFile; fileRef = 16FD615415E21DAA00AB8619 /* CryptoData.c */; };
+		16FD616215E224B400AB8619 /* ImportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FD616115E224B400AB8619 /* ImportViewController.m */; };
+		16FD616515E2259700AB8619 /* GenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FD616415E2259700AB8619 /* GenViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,12 @@
 		1604865D15D291E70048BF64 /* SegViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SegViewController.h; sourceTree = "<group>"; };
 		1604865E15D291E70048BF64 /* SegViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SegViewController.m; sourceTree = "<group>"; };
 		1604866515D292650048BF64 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		16FD615415E21DAA00AB8619 /* CryptoData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CryptoData.c; sourceTree = "<group>"; };
+		16FD615515E21DAA00AB8619 /* CryptoData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CryptoData.h; sourceTree = "<group>"; };
+		16FD616015E224B400AB8619 /* ImportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportViewController.h; sourceTree = "<group>"; };
+		16FD616115E224B400AB8619 /* ImportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportViewController.m; sourceTree = "<group>"; };
+		16FD616315E2259700AB8619 /* GenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenViewController.h; sourceTree = "<group>"; };
+		16FD616415E2259700AB8619 /* GenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,12 +90,18 @@
 		1604864E15D291E70048BF64 /* SecGames */ = {
 			isa = PBXGroup;
 			children = (
+				16FD615415E21DAA00AB8619 /* CryptoData.c */,
+				16FD615515E21DAA00AB8619 /* CryptoData.h */,
 				1604865715D291E70048BF64 /* SegAppDelegate.h */,
 				1604865815D291E70048BF64 /* SegAppDelegate.m */,
 				1604865A15D291E70048BF64 /* MainStoryboard.storyboard */,
 				1604865D15D291E70048BF64 /* SegViewController.h */,
 				1604865E15D291E70048BF64 /* SegViewController.m */,
 				1604864F15D291E70048BF64 /* Supporting Files */,
+				16FD616015E224B400AB8619 /* ImportViewController.h */,
+				16FD616115E224B400AB8619 /* ImportViewController.m */,
+				16FD616315E2259700AB8619 /* GenViewController.h */,
+				16FD616415E2259700AB8619 /* GenViewController.m */,
 			);
 			path = SecGames;
 			sourceTree = "<group>";
@@ -169,6 +184,9 @@
 				1604865515D291E70048BF64 /* main.m in Sources */,
 				1604865915D291E70048BF64 /* SegAppDelegate.m in Sources */,
 				1604865F15D291E70048BF64 /* SegViewController.m in Sources */,
+				16FD615615E21DAA00AB8619 /* CryptoData.c in Sources */,
+				16FD616215E224B400AB8619 /* ImportViewController.m in Sources */,
+				16FD616515E2259700AB8619 /* GenViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +302,7 @@
 				1604866415D291E70048BF64 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

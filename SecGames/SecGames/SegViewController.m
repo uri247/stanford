@@ -8,6 +8,7 @@
 
 #import "SegViewController.h"
 #import "Security/Security.h"
+#import "CryptoData.h"
 
 @interface SegViewController ()
 
