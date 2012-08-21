@@ -11,5 +11,6 @@
 @interface ImportViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *originalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *decipheredLabel;
 
 @end

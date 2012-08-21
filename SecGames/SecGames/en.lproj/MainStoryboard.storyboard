@@ -164,11 +164,19 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Deciphered" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="b42-GH-nhS">
+                                <rect key="frame" x="20" y="85" width="280" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Import" id="gh3-z2-LLT"/>
                     <connections>
+                        <outlet property="decipheredLabel" destination="b42-GH-nhS" id="zUc-uT-bke"/>
                         <outlet property="originalLabel" destination="ZQq-TX-DjV" id="C8N-iw-jMw"/>
                     </connections>
                 </viewController>

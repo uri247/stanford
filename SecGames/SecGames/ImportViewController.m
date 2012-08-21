@@ -8,6 +8,7 @@
 
 #import "ImportViewController.h"
 #import "CryptoData.h"
+#import "CapiOnEay.h"
 
 @interface ImportViewController ()
 
@@ -16,33 +17,27 @@
 
 @implementation ImportViewController
 @synthesize originalLabel = _originalLabel;
+@synthesize decipheredLabel = _decipheredLabel;
 
 
 - (IBAction)importPressed {
-    NSString* clear = [NSString stringWithUTF8String:symMsg1.msg];
-    self.originalLabel.text = clear;
+    NSString* original = [NSString stringWithUTF8String:rsaMsg.msg];
+    self.originalLabel.text = original;
+    HCRYPTPROV hprov;
+    HCRYPTKEY hkey;
     
-    NSMutableDictionary* keyAttr = [[NSMutableDictionary alloc] init];
+    CryptAcquireContext( &hprov );
+    CryptImportKey(hprov, (BYTE*)&prvKeyExtract, sizeof(prvKeyExtract), 0, &hkey);
+    
+    DWORD dataLen = rsaMsg.size;
+    BYTE buffer[400];
+    memcpy( buffer, rsaMsg.cipher, dataLen );
+    CryptDecrypt( hkey, true, 0, buffer, &dataLen );
+    
+    NSString* clear = [NSString stringWithUTF8String:(const char*)buffer];
+    self.decipheredLabel.text = clear;
 
-    /*
-    [keyAttr setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
-    [keyAttr setObject:(__bridge id)kSecAttrKeyTypeRSA forKey:(__bridge id)kSecAttrKeyType];
-    [keyAttr ]
-    
-    
-    //======
-    NSData * peerTag = [[NSData alloc] initWithBytes:(const void *)[peerName UTF8String] length:[peerName length]];
-	NSMutableDictionary * peerPublicKeyAttr = [[NSMutableDictionary alloc] init];
-	
-	[peerPublicKeyAttr setObject:(id)kSecClassKey forKey:(id)kSecClass];
-	[peerPublicKeyAttr setObject:(id)kSecAttrKeyTypeRSA forKey:(id)kSecAttrKeyType];
-    
-    
-	[peerPublicKeyAttr setObject:peerTag forKey:(id)kSecAttrApplicationTag];
-	[peerPublicKeyAttr setObject:publicKey forKey:(id)kSecValueData];
-	[peerPublicKeyAttr setObject:[NSNumber numberWithBool:YES] forKey:(id)kSecReturnPersistentRef];
-    secItemAdd
-     */
+
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -63,6 +58,7 @@
 - (void)viewDidUnload
 {
     [self setOriginalLabel:nil];
+    [self setDecipheredLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
